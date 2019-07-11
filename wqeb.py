@@ -60,7 +60,7 @@ class Cacular(QWidget, Ui_controller):
         except:
             self.lineEditxxy_imformation.setText('error!')
 
-    def ps_11(self):
+    def ps_12(self):
         global ser
         try:
             ser.write('L:1/r/n'.encode())
@@ -68,7 +68,7 @@ class Cacular(QWidget, Ui_controller):
         except:
             self.lineEditxxy_imformation.setText('error!')
 
-    def ps_21(self):
+    def ps_22(self):
         global ser
         try:
             ser.write('L:2/r/n'.encode())
@@ -76,15 +76,7 @@ class Cacular(QWidget, Ui_controller):
         except:
             self.lineEditxxy_imformation.setText('error!')
 
-    def ps_21(self):
-        global ser
-        try:
-            ser.write('L:2/r/n'.encode())
-            ser.readall()
-        except:
-            self.lineEditxxy_imformation.setText('error!')
-
-    def ps_31(self):
+    def ps_32(self):
         global ser
         try:
             ser.write('L:3/r/n'.encode())
@@ -92,13 +84,15 @@ class Cacular(QWidget, Ui_controller):
         except:
             self.lineEditxxy_imformation.setText('error!')
 
-    def ps_41(self):
+    def ps_42(self):
         global ser
         try:
             ser.write('L:4/r/n'.encode())
             ser.readall()
         except:
             self.lineEditxxy_imformation.setText('error!')
+
+
 
 
 

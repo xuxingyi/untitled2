@@ -2,13 +2,11 @@
 
 # Form implementation generated from reading ui file 'new1.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.0
+# Created by: PyQt5 UI code generator 5.6
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_controller(object):
     def setupUi(self, controller):
@@ -308,3 +306,4 @@ class Ui_controller(object):
         self.pushButton_13.setWhatsThis(_translate("controller", "<html><head/><body><p>stop move</p></body></html>"))
         self.pushButton_13.setText(_translate("controller", "to 0"))
         self.toolBar.setWindowTitle(_translate("controller", "toolBar"))
+
