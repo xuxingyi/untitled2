@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QWidget, QApplication, QMainWindow
 import serial
 
 
-class Cacular(QWidget, Ui_controller):
+class Cacular(QMainWindow, Ui_controller):
     """docstring for Cacular"""
     def __init__(self):
         super(Cacular, self).__init__()
@@ -12,7 +12,7 @@ class Cacular(QWidget, Ui_controller):
         self.connecter()
         self.show()
 
-    def connecttomachine(self):
+    def ps_connect(self):
         global ser
         try:
             ser = serial.Serial()
@@ -20,18 +20,27 @@ class Cacular(QWidget, Ui_controller):
             ser.baudrate = 9600
             ser.timeout = 0.2
             ser.open()
-            if(ser.read(4) == 'OK/r/n'):
+            if(ser.read(4) == 'OK\r\n'):
                 self.lineEditxxy_imformation.setText('READY!')
             else:
-                self.lineEditxxy_imformation.setText('cannot connect!')
+                self.lineEditxxy_imformation.setText('smenthing wrong about the machine!')
 
         except:
-            self.lineEditxxy_imformation.setText('cannot connect!')
+            self.lineEditxxy_imformation.setText('cannot connect,maybe the COM has been occupied!')
+
+    def ps_disconcect(self):
+        global ser
+        try:
+            ser.close()
+        except:
+            self.lineEditxxy_imformation.setText('you have not connect before!')
+
+
 
     def ps_11(self):
         global ser
         try:
-            ser.write('H:1/r/n'.encode())
+            ser.write('H:1\r\n'.encode())
             ser.readall()
         except:
             self.lineEditxxy_imformation.setText('error!')
@@ -39,7 +48,7 @@ class Cacular(QWidget, Ui_controller):
     def ps_21(self):
         global ser
         try:
-            ser.write('H:2/r/n'.encode())
+            ser.write('H:2\r\n'.encode())
             ser.readall()
         except:
             self.lineEditxxy_imformation.setText('error!')
@@ -47,7 +56,7 @@ class Cacular(QWidget, Ui_controller):
     def ps_31(self):
         global ser
         try:
-            ser.write('H:3/r/n'.encode())
+            ser.write('H:3\r\n'.encode())
             ser.readall()
         except:
             self.lineEditxxy_imformation.setText('error!')
@@ -55,7 +64,7 @@ class Cacular(QWidget, Ui_controller):
     def ps_41(self):
         global ser
         try:
-            ser.write('H:4/r/n'.encode())
+            ser.write('H:4\r\n'.encode())
             ser.readall()
         except:
             self.lineEditxxy_imformation.setText('error!')
@@ -63,7 +72,7 @@ class Cacular(QWidget, Ui_controller):
     def ps_12(self):
         global ser
         try:
-            ser.write('L:1/r/n'.encode())
+            ser.write('L:1\r\n'.encode())
             ser.readall()
         except:
             self.lineEditxxy_imformation.setText('error!')
@@ -71,7 +80,7 @@ class Cacular(QWidget, Ui_controller):
     def ps_22(self):
         global ser
         try:
-            ser.write('L:2/r/n'.encode())
+            ser.write('L:2\r\n'.encode())
             ser.readall()
         except:
             self.lineEditxxy_imformation.setText('error!')
@@ -79,7 +88,7 @@ class Cacular(QWidget, Ui_controller):
     def ps_32(self):
         global ser
         try:
-            ser.write('L:3/r/n'.encode())
+            ser.write('L:3\r\n'.encode())
             ser.readall()
         except:
             self.lineEditxxy_imformation.setText('error!')
@@ -87,87 +96,182 @@ class Cacular(QWidget, Ui_controller):
     def ps_42(self):
         global ser
         try:
-            ser.write('L:4/r/n'.encode())
+            ser.write('L:4\r\n'.encode())
+            ser.readall()
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+    def ps_13(self):
+        global ser
+        try:
+            ser.write('A:1+P0\r\n'.encode())
+            ser.readall()
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+    def ps_23(self):
+        global ser
+        try:
+            ser.write('A:2+P0\r\n'.encode())
+            ser.readall()
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+    def ps_33(self):
+        global ser
+        try:
+            ser.write('A:3+P0\r\n'.encode())
+            ser.readall()
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+    def ps_43(self):
+        global ser
+        try:
+            ser.write('A:4+P0\r\n'.encode())
+            ser.readall()
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+    def ps_14(self):
+        global ser
+        try:
+            ser.write('R:1\r\n'.encode())
+            ser.readall()
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+    def ps_24(self):
+        global ser
+        try:
+            ser.write('R:2\r\n'.encode())
+            ser.readall()
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+    def ps_34(self):
+        global ser
+        try:
+            ser.write('R:3\r\n'.encode())
+            ser.readall()
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+    def ps_44(self):
+        global ser
+        try:
+            ser.write('R:4\r\n'.encode())
+            ser.readall()
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+    def ps_19(self):
+        global ser
+        str12='M:1-P'+self.lineEditxxy_12.text()+'\r\n'
+        try:
+            ser.write(str12.encode())
+            ser.readall()
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+    def ps_25(self):
+        global ser
+        str22='M:2-P'+self.lineEditxxy_22.text()+'\r\n'
+        try:
+            ser.write(str22.encode())
+            ser.readall()
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+    def ps_35(self):
+        global ser
+        str32='M:3-P'+self.lineEditxxy_32.text()+'\r\n'
+        try:
+            ser.write(str32.encode())
+            ser.readall()
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+    def ps_45(self):
+        global ser
+        str42='M:4-P'+self.lineEditxxy_42.text()+'\r\n'
+        try:
+            ser.write(str42.encode())
+            ser.readall()
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+    def ps_20(self):
+        global ser
+        str13='M:1+P'+self.lineEditxxy_12.text()+'\r\n'
+        try:
+            ser.write(str13.encode())
+            ser.readall()
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+    def ps_26(self):
+        global ser
+        str23='M:2+P'+self.lineEditxxy_22.text()+'\r\n'
+        try:
+            ser.write(str23.encode())
+            ser.readall()
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+    def ps_36(self):
+        global ser
+        str33='M:3+P'+self.lineEditxxy_32.text()+'\r\n'
+        try:
+            ser.write(str33.encode())
+            ser.readall()
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+    def ps_46(self):
+        global ser
+        str43='M:4+P'+self.lineEditxxy_42.text()+'\r\n'
+        try:
+            ser.write(str43.encode())
             ser.readall()
         except:
             self.lineEditxxy_imformation.setText('error!')
 
 
-
-
-
-
-
-    def ps_CE(self):
-        self.lineEdit.clear()
-
-    def ps_Num_1(self):
-        self.lineEdit.insert('1')
-
-    def ps_Num_0(self):
-        self.lineEdit.insert('0')
-
-    def ps_Num_2(self):
-        self.lineEdit.insert('2')
-
-    def ps_Num_3(self):
-        self.lineEdit.insert('3')
-
-    def ps_Num_4(self):
-        self.lineEdit.insert('4')
-
-    def ps_Num_5(self):
-        self.lineEdit.insert('5')
-
-    def ps_Num_6(self):
-        self.lineEdit.insert('6')
-
-    def ps_Num_7(self):
-        self.lineEdit.insert('7')
-
-    def ps_Num_8(self):
-        self.lineEdit.insert('8')
-
-    def ps_Num_9(self):
-        self.lineEdit.insert('9')
-
-    def ps_plus(self):
-        self.lineEdit.insert('+')
-
-    def ps_minus(self):
-        self.lineEdit.insert('-')
-
-    def ps_multi(self):
-        self.lineEdit.insert('*')
-
-    def ps_devide(self):
-        self.lineEdit.insert('/')
-
     def connecter(self):
-        self.Num_0.clicked.connect(self.ps_Num_0)
-        self.Num_1.clicked.connect(self.ps_Num_1)
-        self.Num_2.clicked.connect(self.ps_Num_2)
-        self.Num_3.clicked.connect(self.ps_Num_3)
-        self.Num_4.clicked.connect(self.ps_Num_4)
-        self.Num_5.clicked.connect(self.ps_Num_5)
-        self.Num_6.clicked.connect(self.ps_Num_6)
-        self.Num_7.clicked.connect(self.ps_Num_7)
-        self.Num_8.clicked.connect(self.ps_Num_8)
-        self.Num_9.clicked.connect(self.ps_Num_9)
-        self.OP_plus.clicked.connect(self.ps_plus)
-        self.OP_minus.clicked.connect(self.ps_minus)
-        self.OP_multi.clicked.connect(self.ps_multi)
-        self.OP_devide.clicked.connect(self.ps_devide)
-        self.OP_equal.clicked.connect(self.calcu)
-        self.CE.clicked.connect(self.ps_CE)
+        self.pushButton_concect.clicked.connect(self.ps_connect)
+        self.pushButton_disconnect.clicked.connect(self.ps_disconcect)
+        self.pushButton_11.clicked.connect(self.ps_11)
+        self.pushButton_21.clicked.connect(self.ps_21)
+        self.pushButton_31.clicked.connect(self.ps_31)
+        self.pushButton_41.clicked.connect(self.ps_41)
+        self.pushButton_12.clicked.connect(self.ps_12)
+        self.pushButton_22.clicked.connect(self.ps_22)
+        self.pushButton_32.clicked.connect(self.ps_32)
+        self.pushButton_42.clicked.connect(self.ps_42)
+        self.pushButton_13.clicked.connect(self.ps_13)
+        self.pushButton_23.clicked.connect(self.ps_23)
+        self.pushButton_33.clicked.connect(self.ps_33)
+        self.pushButton_43.clicked.connect(self.ps_43)
+        self.pushButton_41.clicked.connect(self.ps_41)
+        self.pushButton_42.clicked.connect(self.ps_42)
+        self.pushButton_43.clicked.connect(self.ps_43)
+        self.pushButton_44.clicked.connect(self.ps_44)
+        self.pushButton_11.clicked.connect(self.ps_11)
+        self.pushButton_11.clicked.connect(self.ps_11)
 
-    def calcu(self):
-        text = self.lineEdit.text()
-        try:
-            result = eval(text)
-            self.lineEdit.setText(str(eval(text)))
-        except:
-            self.lineEdit.setText('invalid syntax, check your input!')
+
+
+
+        # self.CE.clicked.connect(self.ps_CE)
+
+    # def calcu(self):
+    #     text = self.lineEdit.text()
+    #     try:
+    #         result = eval(text)
+    #         self.lineEdit.setText(str(eval(text)))
+    #     except:
+    #         self.lineEdit.setText('invalid syntax, check your input!')
 
 
 if __name__ == '__main__':
