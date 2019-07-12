@@ -16,15 +16,12 @@ class Cacular(QMainWindow, Ui_controller):
         global ser
         try:
             ser = serial.Serial()
-            ser.port = '/dev/ttyUSB0'
+            ser.port = 'COM4'
+            # ser.port = '/dev/ttyUSB0'
             ser.baudrate = 9600
             ser.timeout = 0.2
             ser.open()
-            if(ser.read(4) == 'OK\r\n'):
-                self.lineEditxxy_imformation.setText('READY!')
-            else:
-                self.lineEditxxy_imformation.setText('smenthing wrong about the machine!')
-
+            self.lineEditxxy_imformation.setText('READY!')
         except:
             self.lineEditxxy_imformation.setText('cannot connect,maybe the COM has been occupied!')
 
@@ -32,6 +29,7 @@ class Cacular(QMainWindow, Ui_controller):
         global ser
         try:
             ser.close()
+            self.lineEditxxy_imformation.setText('disconnect!')
         except:
             self.lineEditxxy_imformation.setText('you have not connect before!')
 
@@ -42,6 +40,7 @@ class Cacular(QMainWindow, Ui_controller):
         try:
             ser.write('H:1\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('home1 ok!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -50,6 +49,7 @@ class Cacular(QMainWindow, Ui_controller):
         try:
             ser.write('H:2\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('home2 ok!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -58,6 +58,7 @@ class Cacular(QMainWindow, Ui_controller):
         try:
             ser.write('H:3\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('home3 ok!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -66,6 +67,7 @@ class Cacular(QMainWindow, Ui_controller):
         try:
             ser.write('H:4\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('home4 ok!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -74,6 +76,7 @@ class Cacular(QMainWindow, Ui_controller):
         try:
             ser.write('L:1\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('stop!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -82,6 +85,7 @@ class Cacular(QMainWindow, Ui_controller):
         try:
             ser.write('L:2\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('stop!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -90,6 +94,7 @@ class Cacular(QMainWindow, Ui_controller):
         try:
             ser.write('L:3\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('stop!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -98,6 +103,7 @@ class Cacular(QMainWindow, Ui_controller):
         try:
             ser.write('L:4\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('stop!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -105,7 +111,9 @@ class Cacular(QMainWindow, Ui_controller):
         global ser
         try:
             ser.write('A:1+P0\r\n'.encode())
+            ser.write('G:\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('have moved to 0(electr)!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -113,7 +121,9 @@ class Cacular(QMainWindow, Ui_controller):
         global ser
         try:
             ser.write('A:2+P0\r\n'.encode())
+            ser.write('G:\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('have moved to 0(electr)!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -121,7 +131,9 @@ class Cacular(QMainWindow, Ui_controller):
         global ser
         try:
             ser.write('A:3+P0\r\n'.encode())
+            ser.write('G:\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('have moved to 0(electr)!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -129,7 +141,9 @@ class Cacular(QMainWindow, Ui_controller):
         global ser
         try:
             ser.write('A:4+P0\r\n'.encode())
+            ser.write('G:\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('have moved to 0(electr)!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -138,6 +152,7 @@ class Cacular(QMainWindow, Ui_controller):
         try:
             ser.write('R:1\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('have set to 0(electr)!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -146,6 +161,7 @@ class Cacular(QMainWindow, Ui_controller):
         try:
             ser.write('R:2\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('have set to 0(electr)!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -154,6 +170,7 @@ class Cacular(QMainWindow, Ui_controller):
         try:
             ser.write('R:3\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('have set to 0(electr)!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -162,6 +179,7 @@ class Cacular(QMainWindow, Ui_controller):
         try:
             ser.write('R:4\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('have set to 0(electr)!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -170,7 +188,9 @@ class Cacular(QMainWindow, Ui_controller):
         str12='M:1-P'+self.lineEditxxy_12.text()+'\r\n'
         try:
             ser.write(str12.encode())
+            ser.write('G:\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('OK!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -179,7 +199,9 @@ class Cacular(QMainWindow, Ui_controller):
         str22='M:2-P'+self.lineEditxxy_22.text()+'\r\n'
         try:
             ser.write(str22.encode())
+            ser.write('G:\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('OK!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -188,25 +210,33 @@ class Cacular(QMainWindow, Ui_controller):
         str32='M:3-P'+self.lineEditxxy_32.text()+'\r\n'
         try:
             ser.write(str32.encode())
+            ser.write('G:\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('OK!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
     def ps_45(self):
         global ser
         str42='M:4-P'+self.lineEditxxy_42.text()+'\r\n'
+
         try:
             ser.write(str42.encode())
+            ser.write('G:\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('OK!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
     def ps_20(self):
         global ser
         str13='M:1+P'+self.lineEditxxy_12.text()+'\r\n'
+
         try:
             ser.write(str13.encode())
+            ser.write('G:\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('OK!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -215,7 +245,9 @@ class Cacular(QMainWindow, Ui_controller):
         str23='M:2+P'+self.lineEditxxy_22.text()+'\r\n'
         try:
             ser.write(str23.encode())
+            ser.write('G:\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('OK!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -224,7 +256,9 @@ class Cacular(QMainWindow, Ui_controller):
         str33='M:3+P'+self.lineEditxxy_32.text()+'\r\n'
         try:
             ser.write(str33.encode())
+            ser.write('G:\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('OK!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -233,7 +267,9 @@ class Cacular(QMainWindow, Ui_controller):
         str43='M:4+P'+self.lineEditxxy_42.text()+'\r\n'
         try:
             ser.write(str43.encode())
+            ser.write('G:\r\n'.encode())
             ser.readall()
+            self.lineEditxxy_imformation.setText('OK!')
         except:
             self.lineEditxxy_imformation.setText('error!')
 
@@ -253,12 +289,21 @@ class Cacular(QMainWindow, Ui_controller):
         self.pushButton_23.clicked.connect(self.ps_23)
         self.pushButton_33.clicked.connect(self.ps_33)
         self.pushButton_43.clicked.connect(self.ps_43)
-        self.pushButton_41.clicked.connect(self.ps_41)
-        self.pushButton_42.clicked.connect(self.ps_42)
-        self.pushButton_43.clicked.connect(self.ps_43)
+        self.pushButton_14.clicked.connect(self.ps_14)
+        self.pushButton_24.clicked.connect(self.ps_24)
+        self.pushButton_34.clicked.connect(self.ps_34)
         self.pushButton_44.clicked.connect(self.ps_44)
-        self.pushButton_11.clicked.connect(self.ps_11)
-        self.pushButton_11.clicked.connect(self.ps_11)
+        self.pushButton_19.clicked.connect(self.ps_19)
+        self.pushButton_20.clicked.connect(self.ps_20)
+        self.pushButton_25.clicked.connect(self.ps_25)
+        self.pushButton_26.clicked.connect(self.ps_26)
+        self.pushButton_35.clicked.connect(self.ps_35)
+        self.pushButton_36.clicked.connect(self.ps_36)
+        self.pushButton_45.clicked.connect(self.ps_45)
+        self.pushButton_46.clicked.connect(self.ps_46)
+
+
+
 
 
 
