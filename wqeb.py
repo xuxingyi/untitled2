@@ -22,6 +22,7 @@ class Cacular(QMainWindow, Ui_controller):
             ser.timeout = 0.2
             ser.open()
             self.lineEditxxy_imformation.setText('READY!')
+            ser.write(''.encode())
         except:
             self.lineEditxxy_imformation.setText('cannot connect,maybe the COM has been occupied!')
 
@@ -273,12 +274,33 @@ class Cacular(QMainWindow, Ui_controller):
         except:
             self.lineEditxxy_imformation.setText('error!')
 
+    def ps_refresh(self):
+        global ser
+        try:
+            ser.readall()
+            ser.write('Q:\r\n'.encode())
+            newdata = ser.readall()
+            strnewdata = newdata.decode()
+            x1 = int(strnewdata[1:10])
+            x2 = int(strnewdata[12:21])
+            x3 = int(strnewdata[23:32])
+            x4 = int(strnewdata[34:43])
+            self.lineEditxxy_11.setText(strnewdata[0] + str(x1))
+            self.lineEditxxy_21.setText(strnewdata[11] + str(x2))
+            self.lineEditxxy_31.setText(strnewdata[22] + str(x3))
+            self.lineEditxxy_41.setText(strnewdata[33] + str(x4))
+            self.lineEditxxy_imformation.setText('OK!')
+        except:
+            self.lineEditxxy_imformation.setText('error!')
+
+
+
 
     def connecter(self):
         self.pushButton_concect.clicked.connect(self.ps_connect)
         self.pushButton_disconnect.clicked.connect(self.ps_disconcect)
         self.pushButton_11.clicked.connect(self.ps_11)
-        self.pushButton_21.clicked.connect(self.ps_21)
+        # self.pushButton_21.clicked.connect(self.ps_21)
         self.pushButton_31.clicked.connect(self.ps_31)
         self.pushButton_41.clicked.connect(self.ps_41)
         self.pushButton_12.clicked.connect(self.ps_12)
@@ -301,6 +323,7 @@ class Cacular(QMainWindow, Ui_controller):
         self.pushButton_36.clicked.connect(self.ps_36)
         self.pushButton_45.clicked.connect(self.ps_45)
         self.pushButton_46.clicked.connect(self.ps_46)
+        self.pushButton_refresh.clicked.connect(self.ps_refresh)
 
 
 
